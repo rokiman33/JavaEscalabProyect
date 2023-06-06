@@ -28,12 +28,10 @@ public class UsersController {
     //GET ALL USERS
     @GetMapping("/")
     @Operation(summary = "Get all users")
-    public List<Users> getAllUsers() {
-
+    public List<UsersDTO> getAllUsers() {
         if(usersRepository.count() == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No users found");
         }
-
         return usersService.findAll();
     }
 
@@ -41,9 +39,9 @@ public class UsersController {
     //GET USER BY ID
     @GetMapping("/{id}")
     @Operation(summary = "Get user by id")
-    public Users getUserById(@PathVariable("id") UUID id) {
+    public UsersDTO getUserById(@PathVariable("id") UUID id) {
 
-        Users user = usersService.findById(id);
+        UsersDTO user = usersService.findById(id);
 
         if(user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
@@ -55,9 +53,9 @@ public class UsersController {
     //CREATE USER
     @PostMapping("/")
     @Operation(summary = "Create user")
-    public Users createUser(@RequestBody Users user) {
+    public UsersDTO createUser(@RequestBody UsersDTO user) {
 
-        Users newUser = usersService.save(user);
+        UsersDTO newUser = usersService.save(user);
 
         if(newUser == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User could not be created");
@@ -69,11 +67,11 @@ public class UsersController {
     //UPDATE USER
     @PutMapping("/")
     @Operation(summary = "Update user")
-    public Users updateUser(@RequestBody Users user) {
+    public int updateUser(@RequestBody Users user) {
 
-        Users updatedUser = usersService.update(user);
+        int updatedUser = usersService.update(user);
 
-        if(updatedUser == null) {
+        if(updatedUser == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User could not be updated");
         }
 
@@ -84,7 +82,7 @@ public class UsersController {
     @Operation(summary = "Delete user")
     public void deleteUser(@PathVariable("id") UUID id) {
 
-        Users user = usersService.findById(id);
+        UsersDTO user = usersService.findById(id);
 
         if(user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
@@ -97,7 +95,7 @@ public class UsersController {
     @Operation(summary = "Login")
     public Users login(@RequestBody Users user) {
 
-        Users loggedUser = usersService.login(user.getNombreUsuario(), user.getPassword());
+        Users loggedUser = usersService.login(user.getUsername(), user.getPassword());
 
         if(loggedUser == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");

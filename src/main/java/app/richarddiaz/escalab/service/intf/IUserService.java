@@ -1,6 +1,8 @@
 package app.richarddiaz.escalab.service.intf;
 
+import app.richarddiaz.escalab.model.dto.UsersDTO;
 import app.richarddiaz.escalab.model.entity.Users;
+import org.apache.catalina.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,16 +10,16 @@ import java.util.UUID;
 public interface IUserService {
 
     //obtener todos los usuarios
-    List<Users> findAll();
+    List<UsersDTO> findAll();
 
     //obtener un usuario por id
-    Users findById(UUID id);
+    UsersDTO findById(UUID id);
 
     //grabar un usuario
-    Users save(Users users);
+    UsersDTO save(UsersDTO users);
 
     //actualizar un usuario
-    Users update(Users users);
+    int update(Users users);
 
     //eliminar un usuario
     void delete(UUID id);

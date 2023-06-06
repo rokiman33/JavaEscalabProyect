@@ -1,6 +1,7 @@
 package app.richarddiaz.escalab.model.dto;
 
 import app.richarddiaz.escalab.model.entity.Phones;
+import app.richarddiaz.escalab.model.entity.Users;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -12,6 +13,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,10 +21,10 @@ import java.util.List;
 @Setter
 public class UsersDTO {
 
-    private String id;
+    private UUID id;
 
     @NotEmpty(message = "El nombre es obligatorio")
-    private String NombreUsuario;
+    private String UserName;
 
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
             message = "La contraseña debe tener al menos 8 caracteres, incluyendo una letra minúscula, una letra mayúscula, un número y un caracter especial (@#$%^&+=).")
@@ -40,6 +42,39 @@ public class UsersDTO {
     @Valid
     private List<Phones> phones;
 
+    public UsersDTO(String username, String password, String email, List<Phones> phones) {
+        this.UserName = username;
+        this.password = password;
+        this.email = email;
+        this.phones = phones;
+    }
 
+    //Conecto el DTO con la entidad
+    public static  UsersDTO fromEntity(Users users){
+        UsersDTO usersDTO = new UsersDTO();
+        usersDTO.setId(users.getId());
+        usersDTO.setUserName(users.getUsername());
+        usersDTO.setPassword(users.getPassword());
+        usersDTO.setEnabled(users.isEnabled());
+        usersDTO.setEmail(users.getEmail());
+        usersDTO.setCreated(users.getCreated());
+        usersDTO.setModified(users.getModified());
+        usersDTO.setPhones(users.getPhones());
+        return usersDTO;
+    }
+
+    //Conecto la entidad con el DTO
+    public static Users toEntity(UsersDTO usersDTO){
+        Users users = new Users();
+        users.setId(usersDTO.getId());
+        users.setUsername(usersDTO.getUserName());
+        users.setPassword(usersDTO.getPassword());
+        users.setEnabled(usersDTO.isEnabled());
+        users.setEmail(usersDTO.getEmail());
+        users.setCreated(usersDTO.getCreated());
+        users.setModified(usersDTO.getModified());
+        users.setPhones(usersDTO.getPhones());
+        return users;
+    }
 
 }

@@ -26,7 +26,7 @@ public class Users extends RepresentationModel<Users>  {
     private UUID id;
 
     @Column(name = "username", nullable = false, unique = true, length = 20)
-    private String NombreUsuario;
+    private String Username;
 
     @Column(name = "password", nullable = false, length = 60)
     private String Password;
