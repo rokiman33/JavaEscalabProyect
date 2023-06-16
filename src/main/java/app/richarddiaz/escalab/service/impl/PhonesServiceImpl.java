@@ -32,8 +32,11 @@ public class PhonesServiceImpl implements IPhonesService {
     }
 
     @Override
-    public PhonesDTO save(PhonesDTO phones) {
+    public PhonesDTO save(PhonesDTO phones, UUID id) {
+        //asignamos un UUDI al usuario
+
         Phones entity = PhonesDTO.toEntity(phones);
+        entity.getUsers().setId(id);
         phonesRepository.save(entity);
 
         return PhonesDTO.fromEntity(entity);

@@ -1,6 +1,8 @@
 package app.richarddiaz.escalab.service.impl;
 
+import app.richarddiaz.escalab.model.dto.PhonesDTO;
 import app.richarddiaz.escalab.model.dto.UsersDTO;
+import app.richarddiaz.escalab.model.entity.Phones;
 import app.richarddiaz.escalab.model.entity.Users;
 import app.richarddiaz.escalab.model.repository.PhonesRepository;
 import app.richarddiaz.escalab.model.repository.UsersRepository;
@@ -48,6 +50,7 @@ public class UsersServiceImpl implements IUserService {
         users.setCreated(java.time.LocalDateTime.now());
         Users userEntity = UsersDTO.toEntity(users);
         usersRepository.save(userEntity);
+
         return UsersDTO.fromEntity(userEntity);
     }
 

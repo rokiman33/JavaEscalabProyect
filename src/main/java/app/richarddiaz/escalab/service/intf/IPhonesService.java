@@ -10,7 +10,7 @@ public interface IPhonesService {
     List<PhonesDTO> findbyUserId(UUID id);
 
     //grabar un telefono
-    PhonesDTO save(PhonesDTO phones);
+    PhonesDTO save(PhonesDTO phones, UUID id);
 
     //actualizar un telefono
     int update(PhonesDTO phones);

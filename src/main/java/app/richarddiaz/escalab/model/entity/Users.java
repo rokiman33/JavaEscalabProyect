@@ -10,6 +10,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import javax.print.attribute.standard.DateTimeAtCreation;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.List;
@@ -43,8 +44,8 @@ public class Users extends RepresentationModel<Users>  {
     @Column(name = "modified", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime Modified;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Phones> phones;
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private List<Phones> phones = new ArrayList<>();
 
 
 }
