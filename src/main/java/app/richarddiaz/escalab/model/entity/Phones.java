@@ -30,11 +30,4 @@ public class Phones extends RepresentationModel<Phones>{
     @Column(name = "countrycode", nullable = false)
     private String CountryCode;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private UUID userId;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id")
-    private Users users;
-
 }

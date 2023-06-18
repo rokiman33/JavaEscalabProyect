@@ -20,7 +20,7 @@ public interface PhonesRepository extends JpaRepository<Phones, Long> {
     @Query("update Phones p set p.Number = ?1, p.CityCode = ?2, p.CountryCode = ?3 where p.phone_id = ?4")
     int updateIdByPhone(@NonNull Long id, Phones phones);
 
-    @Query("select p.Number, p.CityCode, p.CountryCode from Phones p where p.users.id = ?1")
+    @Query("select p.Number, p.CityCode, p.CountryCode from Phones p where p.phone_id = ?1")
     List<Phones> findByUserId(UUID id);
 
 }

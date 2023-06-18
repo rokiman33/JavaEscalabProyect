@@ -36,7 +36,7 @@ public class PhonesServiceImpl implements IPhonesService {
         //asignamos un UUDI al usuario
 
         Phones entity = PhonesDTO.toEntity(phones);
-        entity.getUsers().setId(id);
+        //entity.getUsers().setId(id);
         phonesRepository.save(entity);
 
         return PhonesDTO.fromEntity(entity);

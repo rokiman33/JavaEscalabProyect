@@ -39,7 +39,7 @@ public class UsersServiceImpl implements IUserService {
     @Override
     public UsersDTO findById(UUID id) {
         Optional<Users> userop = usersRepository.findById(id);
-        return userop.map(users -> new UsersDTO(users.getUsername(), users.getPassword(), users.getEmail(), users.getPhones())).orElse(null);
+        return userop.map(users -> new UsersDTO(users.getId(), users.getUsername(), users.getPassword(), users.getEmail(),users.isEnabled(),users.getCreated(),users.getModified(),users.getPhones())).orElse(null);
     }
 
     @Override

@@ -44,7 +44,8 @@ public class Users extends RepresentationModel<Users>  {
     @Column(name = "modified", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime Modified;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id")
     private List<Phones> phones = new ArrayList<>();
 
 

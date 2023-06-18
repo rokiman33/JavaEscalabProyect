@@ -42,11 +42,16 @@ public class UsersDTO {
     @Valid
     private List<Phones> phones;
 
-    public UsersDTO(String username, String password, String email, List<Phones> phones) {
+    public UsersDTO(UUID id,String username, String password, String email,boolean enabled,LocalDateTime created,LocalDateTime modified, List<Phones> phones) {
+        this.id = id;
         this.UserName = username;
         this.password = password;
         this.email = email;
         this.phones = phones;
+        this.Enabled = enabled;
+        this.Created = created;
+        this.Modified = modified;
+
     }
 
     //Conecto el DTO con la entidad
