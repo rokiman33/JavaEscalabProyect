@@ -76,23 +76,8 @@ public class UsersServiceImpl implements IUserService {
 
         }
 
-        //addPhoneToUser(users.getId(),phone);
-        //users.setPhones(new ArrayList<>());
         Users userEntity = UsersDTO.toEntity(users);
-        //usersRepository.save(userEntity);
         return UsersDTO.fromEntity(userEntity);
-    }
-
-    @Transactional
-    public void addPhoneToUser(UUID userId,Phones phone) {
-        Optional<Users> optionalUser = usersRepository.findById(userId);
-        if(optionalUser.isPresent()){
-            Users user = optionalUser.get();
-            List<Phones> phones = user.getPhones();
-            phones.add(phone);
-            user.setPhones(phones);
-            usersRepository.save(user);
-        }
     }
 
     @Override
