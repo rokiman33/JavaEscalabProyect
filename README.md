@@ -10,7 +10,9 @@ http://localhost:8080/doc/swagger-ui/index.html
 URL : http://localhost:8080/users/ 
 
 Resultado :
-`[
+
+```
+[
   {
     "id": "9037a85b-bf0c-4c72-86af-49cc6aa30e10",
     "password": "999777",
@@ -69,5 +71,5 @@ Resultado :
     "userName": "richard"
   }
 ]
-Response headers
-`
+```
+
