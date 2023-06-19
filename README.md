@@ -5,11 +5,10 @@ Para conectarse al API de proyecto utilice la URL para swagger
 
 http://localhost:8080/doc/swagger-ui/index.html
 
-#Para Utilizar puede Aplicar lo siguiente :
-
+## Para Utilizar puede Aplicar lo siguiente :
+Verbo : GET
 URL : http://localhost:8080/users/ 
-
-Resultado :
+Payload :
 
 ```
 [
@@ -72,4 +71,30 @@ Resultado :
   }
 ]
 ```
-
+## Verbo POST
+## URL : 
+## Payload :
+```
+{
+  "status": 201,
+  "message": {
+    "id": "1dce2f94-941f-44f7-9794-7a4630d3c9d1",
+    "password": "123777",
+    "email": "gam@gmail.com",
+    "phones": [
+      {
+        "phone_id": null,
+        "number": "555566785",
+        "cityCode": "32",
+        "countryCode": "56",
+        "links": []
+      }
+    ],
+    "enabled": true,
+    "userName": "Gabriel",
+    "created": "2023-06-19T18:29:54.941629",
+    "modified": null
+  },
+  "recordCount": 1
+}
+```
