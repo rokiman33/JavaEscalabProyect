@@ -52,6 +52,7 @@ public class UsersController {
 
     //CREATE USER
     @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create user")
     public UsersDTO createUser(@RequestBody UsersDTO user) {
 
@@ -67,18 +68,20 @@ public class UsersController {
     //UPDATE USER
     @PutMapping("/")
     @Operation(summary = "Update user")
-    public int updateUser(@RequestBody Users user) {
+    public UsersDTO updateUser(@RequestBody UsersDTO user) {
 
-        int updatedUser = usersService.update(user);
+        UsersDTO updatedUser = usersService.update(user);
 
-        if(updatedUser == 0) {
+        if(updatedUser == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User could not be updated");
         }
 
         return updatedUser;
     }
+
     //DELETE USER
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete user")
     public void deleteUser(@PathVariable("id") UUID id) {
 
@@ -89,6 +92,7 @@ public class UsersController {
         }
 
         usersService.delete(id);
+
     }
     //LOGIN
     @PostMapping("/login")

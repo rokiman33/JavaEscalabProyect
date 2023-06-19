@@ -1,6 +1,7 @@
 package app.richarddiaz.escalab.service.intf;
 
 import app.richarddiaz.escalab.model.dto.UsersDTO;
+import app.richarddiaz.escalab.model.entity.Phones;
 import app.richarddiaz.escalab.model.entity.Users;
 import org.apache.catalina.User;
 
@@ -19,13 +20,15 @@ public interface IUserService {
     UsersDTO save(UsersDTO users);
 
     //actualizar un usuario
-    int update(Users users);
+    UsersDTO update(UsersDTO users);
 
     //eliminar un usuario
     void delete(UUID id);
 
     //login
     Users login(String username, String password);
+
+
 
 
 

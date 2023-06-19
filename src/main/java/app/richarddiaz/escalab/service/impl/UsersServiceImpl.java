@@ -7,12 +7,14 @@ import app.richarddiaz.escalab.model.entity.Users;
 import app.richarddiaz.escalab.model.repository.PhonesRepository;
 import app.richarddiaz.escalab.model.repository.UsersRepository;
 import app.richarddiaz.escalab.service.intf.IUserService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UsersServiceImpl implements IUserService {
@@ -55,9 +57,42 @@ public class UsersServiceImpl implements IUserService {
     }
 
     @Override
-    public int update(Users users) {
+    public UsersDTO update(UsersDTO users) {
         users.setModified(java.time.LocalDateTime.now());
-        return usersRepository.updateIdByUsernameLike(users.getId(),users);
+
+        for(Phones phone: users.getPhones())
+        {
+            Optional<Users> optionalUser = usersRepository.findById(users.getId());
+            if(optionalUser.isPresent()){
+                Users user = optionalUser.get();
+
+                List<Phones> phones = users.getPhones().stream()
+                        .map(phoneDTO -> PhonesDTO.toEntity(PhonesDTO.fromEntity(phoneDTO)))
+                        .toList();
+                user.getPhones().addAll(phones);
+
+                usersRepository.save(user);
+            }
+
+        }
+
+        //addPhoneToUser(users.getId(),phone);
+        //users.setPhones(new ArrayList<>());
+        Users userEntity = UsersDTO.toEntity(users);
+        //usersRepository.save(userEntity);
+        return UsersDTO.fromEntity(userEntity);
+    }
+
+    @Transactional
+    public void addPhoneToUser(UUID userId,Phones phone) {
+        Optional<Users> optionalUser = usersRepository.findById(userId);
+        if(optionalUser.isPresent()){
+            Users user = optionalUser.get();
+            List<Phones> phones = user.getPhones();
+            phones.add(phone);
+            user.setPhones(phones);
+            usersRepository.save(user);
+        }
     }
 
     @Override

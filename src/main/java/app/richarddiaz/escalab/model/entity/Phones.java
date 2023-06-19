@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
-import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "phones")
@@ -21,7 +19,7 @@ public class Phones extends RepresentationModel<Phones>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long phone_id;
 
-    @Column(name = "number", nullable = false, unique = true)
+    @Column(name = "number", nullable = false, unique = false)
     private String Number;
 
     @Column(name = "citycode", nullable = false)
