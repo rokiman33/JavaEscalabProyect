@@ -6,9 +6,9 @@ Para conectarse al API de proyecto utilice la URL para swagger
 http://localhost:8080/doc/swagger-ui/index.html
 
 ## Para Utilizar puede Aplicar lo siguiente :
-Verbo : GET
-URL : http://localhost:8080/users/ 
-Payload :
+### Verbo : GET
+### URL : http://localhost:8080/users/ 
+### Payload :
 
 ```
 [
@@ -71,9 +71,9 @@ Payload :
   }
 ]
 ```
-## Verbo POST
-## URL : 
-## Payload :
+### Verbo POST
+### URL : 
+### Payload :
 ```
 {
   "status": 201,
