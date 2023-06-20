@@ -3,12 +3,12 @@ Proyecto Certificacion Java
 
 Para conectarse al API de proyecto utilice la URL para swagger 
 
-http://localhost:8080/doc/swagger-ui/index.html
+#### http://localhost:8080/doc/swagger-ui/index.html
 
-## Para Utilizar puede Aplicar lo siguiente :
-### Verbo : GET
-### URL : http://localhost:8080/users/ 
-### Payload :
+### Para Utilizar puede Aplicar lo siguiente :
+#### Verbo  GET
+#### URL  http://localhost:8080/users/ 
+#### Payload 
 
 ```
 [
@@ -71,9 +71,9 @@ http://localhost:8080/doc/swagger-ui/index.html
   }
 ]
 ```
-### Verbo POST
-### URL : 
-### Payload :
+#### <span style="color:yellow">HTTP POST</span>  
+#### URL : 
+#### Payload :
 ```
 {
   "status": 201,
