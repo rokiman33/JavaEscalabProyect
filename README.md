@@ -1,6 +1,6 @@
 # JavaEscalabProyect
 Proyecto Certificacion Java / Springboot
-![](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png){width='100px'}
+
 
 Para conectarse al API de proyecto utilice la URL para swagger 
 
