@@ -71,7 +71,7 @@ Para conectarse al API de proyecto utilice la URL para swagger
   }
 ]
 ```
-#### <span style="color:yellow">HTTP POST</span>  
+#### <font color='red'>HTTP POST</font> 
 #### URL : 
 #### Payload :
 ```
