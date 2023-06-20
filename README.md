@@ -1,6 +1,6 @@
 # JavaEscalabProyect
 Proyecto Certificacion Java / Springboot
-![Spring](https://docs.spring.io/spring-security/reference/_/img/spring-logo.svg "Spring")
+![Spring](https://docs.spring.io/spring-security/reference/_/img/spring-logo.svg "Spring"){width='100px'}
 
 Para conectarse al API de proyecto utilice la URL para swagger 
 
