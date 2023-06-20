@@ -4,6 +4,7 @@ import app.richarddiaz.escalab.model.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,6 @@ public interface UsersRepository extends JpaRepository<Users, UUID> {
     int updateIdByUsernameLike(@NonNull UUID id, Users users);
 
     //login
-    @Query("select u.id, u.Username, u.Password, u.Email, u.Enabled from Users u where u.Username = ?1 and u.Password = ?2")
-    Users findByNombreUsuarioAndPassword(String Username, String password);
+    @Query("select u.id from Users u where u.Email = :email and u.Password = :password")
+    UUID findIdByEmailAndPassword(@Param("email") String email,@Param("password") String password);
 }

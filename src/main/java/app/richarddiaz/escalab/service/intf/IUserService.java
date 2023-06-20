@@ -26,7 +26,7 @@ public interface IUserService {
     void delete(UUID id);
 
     //login
-    Users login(String username, String password);
+    UUID login(String email, String password);
 
 
 

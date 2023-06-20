@@ -86,8 +86,8 @@ public class UsersServiceImpl implements IUserService {
     }
 
     @Override
-    public Users login(String username, String password) {
-        return usersRepository.findByNombreUsuarioAndPassword(username, password);
+    public UUID login(String email, String password) {
+        return usersRepository.findIdByEmailAndPassword(email, password);
     }
 
 

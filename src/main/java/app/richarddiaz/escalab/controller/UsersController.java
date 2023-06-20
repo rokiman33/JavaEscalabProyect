@@ -1,6 +1,7 @@
 package app.richarddiaz.escalab.controller;
 
 import app.richarddiaz.escalab.model.dto.UsersDTO;
+import app.richarddiaz.escalab.model.entity.ResponseModel;
 import app.richarddiaz.escalab.model.repository.UsersRepository;
 import app.richarddiaz.escalab.service.impl.UsersServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,7 +19,7 @@ public class UsersController {
 
     UsersServiceImpl usersService;
     private final UsersRepository usersRepository;
-
+    private final ResponseModel response = new ResponseModel();
     public UsersController(UsersServiceImpl usersService,
                            UsersRepository usersRepository) {
         this.usersService = usersService;
@@ -28,84 +29,125 @@ public class UsersController {
     //GET ALL USERS
     @GetMapping("/")
     @Operation(summary = "Get all users")
-    public List<UsersDTO> getAllUsers() {
+    public ResponseModel getAllUsers() {
         if(usersRepository.count() == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No users found");
+
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+            response.setMessage("No users found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, response.getMessage().toString());
         }
-        return usersService.findAll();
+
+        response.setStatus(HttpStatus.OK.value());
+        response.setMessage(usersService.findAll());
+        response.setRecordCount(usersService.findAll().size());
+
+        return response;
     }
 
 
     //GET USER BY ID
     @GetMapping("/{id}")
     @Operation(summary = "Get user by id")
-    public UsersDTO getUserById(@PathVariable("id") UUID id) {
+    public ResponseModel getUserById(@PathVariable("id") UUID id) {
 
         UsersDTO user = usersService.findById(id);
 
         if(user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+            response.setMessage("User not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, response.getMessage().toString());
         }
 
-        return user;
+        response.setStatus(HttpStatus.OK.value());
+        response.setMessage(user);
+        response.setRecordCount(1);
+
+        return response;
     }
 
     //CREATE USER
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create user")
-    public UsersDTO createUser(@RequestBody UsersDTO user) {
+    public ResponseModel createUser(@RequestBody UsersDTO user) {
 
         UsersDTO newUser = usersService.save(user);
 
         if(newUser == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User could not be created");
+
+            response.setStatus(HttpStatus.BAD_REQUEST.value());
+            response.setMessage("User could not be created");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, response.getMessage().toString());
         }
 
-        return newUser;
+        response.setStatus(HttpStatus.CREATED.value());
+        response.setMessage(newUser);
+        response.setRecordCount(1);
+
+        return response;
     }
 
     //UPDATE USER
     @PutMapping("/")
     @Operation(summary = "Update user")
-    public UsersDTO updateUser(@RequestBody UsersDTO user) {
+    public ResponseModel updateUser(@RequestBody UsersDTO user) {
 
         UsersDTO updatedUser = usersService.update(user);
 
         if(updatedUser == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User could not be updated");
+
+            response.setStatus(HttpStatus.BAD_REQUEST.value());
+            response.setMessage("User could not be updated");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, response.getMessage().toString());
         }
 
-        return updatedUser;
+        response.setStatus(HttpStatus.OK.value());
+        response.setMessage(updatedUser);
+        response.setRecordCount(1);
+        return response;
     }
 
     //DELETE USER
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete user")
-    public void deleteUser(@PathVariable("id") UUID id) {
+    public ResponseModel deleteUser(@PathVariable("id") UUID id) {
 
         UsersDTO user = usersService.findById(id);
 
         if(user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+            response.setMessage("User not Deleted");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, response.getMessage().toString());
         }
 
         usersService.delete(id);
+        response.setStatus(HttpStatus.OK.value());
+        response.setMessage("User Deleted");
+        response.setRecordCount(1);
 
+        return response;
     }
     //LOGIN
     @PostMapping("/login")
     @Operation(summary = "Login")
-    public Users login(@RequestBody Users user) {
+    public ResponseModel login(@RequestBody Users user) {
 
-        Users loggedUser = usersService.login(user.getUsername(), user.getPassword());
+        UUID loggedUser = usersService.login(user.getEmail(), user.getPassword());
 
         if(loggedUser == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+            response.setMessage("User not found");
+            response.setRecordCount(0);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, response.getMessage().toString());
         }
 
-        return loggedUser;
+        response.setStatus(HttpStatus.OK.value());
+        response.setMessage(loggedUser.toString());
+        response.setRecordCount(1);
+        return response;
     }
 
 }
