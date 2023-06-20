@@ -6,7 +6,7 @@ Para conectarse al API de proyecto utilice la URL para swagger
 #### http://localhost:8080/doc/swagger-ui/index.html
 
 ### Para Utilizar puede Aplicar lo siguiente :
-#### <span style="color:green">HTTP GET</span>
+<span style="color:green">HTTP GET</span>
 #### URL  http://localhost:8080/users/ 
 #### Payload 
 
